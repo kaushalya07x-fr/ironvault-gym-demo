@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IronVault Fitness — Build Power. Build Discipline.</title>
+<meta name="description" content="IronVault Fitness is a premium strength, bodybuilding and personal-training club. Expert coaches, structured programs and a modern facility open 6AM–11PM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0a0a0a;
+  --bg-2:#111110;
+  --bg-3:#191917;
+  --card:#141412;
+  --stroke:rgba(255,255,255,.08);
+  --stroke-2:rgba(255,255,255,.14);
+  --text:#f4f3ee;
+  --text-dim:#9a9a91;
+  --text-dim2:#6c6c64;
+  --lime:#d7ff3e;
+  --lime-2:#eeffab;
+  --orange:#ff6a2b;
+  --r-sm:6px;
+  --r-md:14px;
+  --r-lg:24px;
+  --maxw:1240px;
+  --ease:cubic-bezier(.16,.84,.28,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  line-height:1.5;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+ul{list-style:none;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+::selection{background:var(--lime);color:#0a0a0a;}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:2px;}
+
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12.5px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--lime);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.eyebrow::before{
+  content:'';
+  width:22px;height:1px;background:var(--lime);
+}
+h1,h2,h3,.display{
+  font-family:'Anton',sans-serif;
+  font-weight:400;
+  text-transform:uppercase;
+  line-height:.96;
+  letter-spacing:.005em;
+}
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head h2{font-size:clamp(34px,5vw,58px);margin-top:14px;}
+.section-head p{color:var(--text-dim);font-size:16.5px;margin-top:16px;max-width:520px;}
+.section{padding:120px 0;position:relative;}
+@media(max-width:720px){.section{padding:76px 0;} .wrap{padding:0 20px;}}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 30px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  border-radius:2px;
+  transition:transform .35s var(--ease),background .3s,color .3s,box-shadow .3s;
+  white-space:nowrap;
+}
+.btn-fill{background:var(--lime);color:#0a0a0a;}
+.btn-fill:hover{transform:translateY(-3px);box-shadow:0 12px 30px -8px rgba(215,255,62,.45);}
+.btn-line{border:1px solid var(--stroke-2);color:var(--text);}
+.btn-line:hover{border-color:var(--lime);color:var(--lime);transform:translateY(-3px);}
+.btn svg{width:15px;height:15px;transition:transform .3s var(--ease);}
+.btn:hover svg{transform:translateX(4px);}
+
+/* reveal-on-scroll */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.rv.in{opacity:1;transform:translateY(0);}
+.rv-scale{opacity:0;transform:scale(.94);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.rv-scale.in{opacity:1;transform:scale(1);}
+@media(prefers-reduced-motion:reduce){
+  .rv,.rv-scale{transition:none;opacity:1;transform:none;}
+}
+
+/* ============ NAV ============ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:26px 0;
+  transition:padding .4s var(--ease),background .4s var(--ease),border-color .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+header.scrolled{
+  padding:16px 0;
+  background:rgba(10,10,10,.78);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-color:var(--stroke);
+}
+nav.wrap{display:flex;align-items:center;justify-content:space-between;}
+.logo{
+  font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.02em;
+  display:flex;align-items:center;gap:9px;
+}
+.logo .dot{width:8px;height:8px;background:var(--lime);border-radius:1px;flex-shrink:0;}
+.nav-links{display:flex;gap:38px;font-size:13.5px;font-weight:500;}
+.nav-links a{position:relative;padding:4px 0;color:var(--text-dim);transition:color .3s;}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--lime);
+  transition:width .35s var(--ease);
+}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{display:flex;align-items:center;gap:22px;}
+.burger{display:none;width:26px;height:20px;position:relative;z-index:200;}
+.burger span{position:absolute;left:0;width:100%;height:2px;background:var(--text);border-radius:2px;transition:all .35s var(--ease);}
+.burger span:nth-child(1){top:0;}
+.burger span:nth-child(2){top:9px;}
+.burger span:nth-child(3){top:18px;}
+.burger.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+
+.mobile-menu{
+  position:fixed;inset:0;background:var(--bg);z-index:150;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:22px;
+  padding:0 32px;
+  clip-path:circle(0px at calc(100% - 40px) 40px);
+  transition:clip-path .55s var(--ease);
+  pointer-events:none;
+}
+.mobile-menu.open{clip-path:circle(150% at calc(100% - 40px) 40px);pointer-events:all;}
+.mobile-menu a{font-family:'Anton',sans-serif;font-size:38px;text-transform:uppercase;color:var(--text-dim);}
+.mobile-menu a:hover{color:var(--lime);}
+
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .nav-cta .btn-fill{display:none;}
+  .burger{display:block;}
+}
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100svh;position:relative;display:flex;align-items:flex-end;
+  padding-bottom:64px;
+  isolation:isolate;
+}
+.hero-media{position:absolute;inset:0;z-index:-2;background:linear-gradient(155deg,#151510,#0a0a0a);overflow:hidden;}
+.hero-media img{width:100%;height:112%;object-fit:cover;opacity:.8;animation:kenBurns 22s ease-in-out infinite alternate;will-change:transform;}
+@keyframes kenBurns{from{transform:scale(1) translateY(0);}to{transform:scale(1.12) translateY(-2%);}}
+.hero-glow{position:absolute;border-radius:50%;filter:blur(110px);mix-blend-mode:screen;pointer-events:none;}
+.hero-glow.lime{width:440px;height:440px;background:var(--lime);opacity:.3;top:6%;left:4%;animation:floatBlob 10s ease-in-out infinite;}
+.hero-glow.orange{width:380px;height:380px;background:var(--orange);opacity:.22;bottom:8%;right:4%;animation:floatBlob 13s ease-in-out infinite reverse;}
+@keyframes floatBlob{0%,100%{transform:translate(0,0);}50%{transform:translate(36px,-30px);}}
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(10,10,10,.1) 0%,rgba(10,10,10,.38) 50%,var(--bg) 97%);
+}
+.ticker{background:var(--bg-2);border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);overflow:hidden;padding:16px 0;}
+.ticker .track{display:inline-block;white-space:nowrap;animation:marquee 28s linear infinite;font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.2em;color:var(--text-dim2);text-transform:uppercase;}
+.ticker .track span{margin:0 20px;}
+.ticker .track span.accent{color:var(--lime);opacity:.85;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media(max-width:720px){.ticker .track{font-size:11px;}}
+.hero-inner{width:100%;}
+.hero-top-space{height:120px;}
+.trust-line{
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--text-dim);
+  display:flex;flex-wrap:wrap;gap:10px 14px;margin-bottom:26px;text-transform:uppercase;
+}
+.trust-line b{color:var(--lime);font-weight:600;}
+.hero h1{font-size:clamp(52px,10vw,132px);}
+.hero h1 .line{display:block;overflow:hidden;}
+.hero h1 .line span{display:inline-block;transform:translateY(105%);animation:riseUp .9s var(--ease) forwards;}
+.hero h1 .line:nth-child(1) span{animation-delay:.15s;}
+.hero h1 .line:nth-child(2) span{animation-delay:.32s;color:var(--lime);}
+@keyframes riseUp{to{transform:translateY(0);}}
+.hero-sub{
+  max-width:480px;color:var(--text-dim);font-size:17px;margin:26px 0 38px;
+  opacity:0;animation:fadeUp .9s var(--ease) forwards;animation-delay:.7s;
+}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp .9s var(--ease) forwards;animation-delay:.85s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.scroll-cue{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--text-dim2);
+  text-transform:uppercase;
+}
+.scroll-cue .bar{width:1px;height:34px;background:var(--stroke-2);position:relative;overflow:hidden;}
+.scroll-cue .bar::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--lime);animation:scrollDown 1.8s ease-in-out infinite;}
+@keyframes scrollDown{0%{top:-100%;}60%{top:100%;}100%{top:100%;}}
+
+/* ============ STATS ============ */
+.stats-section{border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);background:var(--bg-2);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:52px 30px;text-align:left;border-right:1px solid var(--stroke);}
+.stat:last-child{border-right:none;}
+.stat .num{font-family:'Anton',sans-serif;font-size:clamp(38px,4.4vw,64px);color:var(--lime);display:flex;align-items:baseline;gap:4px;}
+.stat .lbl{font-size:13px;color:var(--text-dim);margin-top:8px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr);} .stat:nth-child(2){border-right:none;}}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.collage{position:relative;height:520px;}
+.collage img{position:absolute;object-fit:cover;border-radius:var(--r-md);background:linear-gradient(150deg,var(--bg-3),var(--bg-2));}
+.collage .c1{width:72%;height:78%;top:0;left:0;z-index:2;border:1px solid var(--stroke-2);}
+.collage .c2{width:52%;height:46%;bottom:0;right:0;z-index:3;border:3px solid var(--bg);box-shadow:0 30px 60px -20px rgba(0,0,0,.7);}
+.collage .frame{position:absolute;top:26px;left:26px;width:72%;height:78%;border:1px solid var(--lime);border-radius:var(--r-md);z-index:1;}
+.about-copy h2{font-size:clamp(32px,4.6vw,50px);margin:14px 0 22px;}
+.about-copy>p{color:var(--text-dim);font-size:16px;margin-bottom:34px;max-width:480px;}
+.feat-list{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.feat{display:flex;gap:12px;align-items:flex-start;}
+.feat svg{width:20px;height:20px;color:var(--lime);flex-shrink:0;margin-top:2px;}
+.feat b{font-size:14.5px;display:block;}
+.feat span{font-size:13px;color:var(--text-dim2);}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:50px;} .collage{height:400px;}}
+@media(max-width:520px){.feat-list{grid-template-columns:1fr;}}
+
+/* ============ PROGRAMS ============ */
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.prog-card{
+  position:relative;border-radius:var(--r-md);overflow:hidden;height:400px;
+  border:1px solid var(--stroke);background:linear-gradient(160deg,var(--bg-3),var(--bg-2));
+  transition:transform .5s var(--ease),border-color .4s;
+}
+.prog-card:hover{transform:translateY(-8px);border-color:var(--stroke-2);}
+.prog-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);opacity:.75;}
+.prog-card:hover img{transform:scale(1.08);}
+.prog-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.92) 10%,rgba(0,0,0,.15) 60%);}
+.prog-body{position:absolute;left:0;right:0;bottom:0;padding:26px;z-index:2;}
+.prog-set{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--lime);text-transform:uppercase;}
+.prog-body h3{font-size:24px;margin:10px 0 8px;text-transform:none;font-family:'Anton',sans-serif;text-transform:uppercase;}
+.prog-body p{font-size:13.5px;color:var(--text-dim);max-width:280px;margin-bottom:16px;}
+.prog-link{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text);border-bottom:1px solid var(--stroke-2);padding-bottom:3px;transition:color .3s,border-color .3s;}
+.prog-card:hover .prog-link{color:var(--lime);border-color:var(--lime);}
+.prog-link svg{width:13px;height:13px;transition:transform .3s var(--ease);}
+.prog-card:hover .prog-link svg{transform:translateX(3px);}
+@media(max-width:980px){.prog-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:620px){.prog-grid{grid-template-columns:1fr;}}
+
+/* ============ TRAINERS ============ */
+.tr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.tr-card{border:1px solid var(--stroke);border-radius:var(--r-md);overflow:hidden;background:var(--card);transition:transform .5s var(--ease),border-color .4s;}
+.tr-card:hover{transform:translateY(-6px);border-color:var(--stroke-2);}
+.tr-media{height:280px;position:relative;overflow:hidden;background:linear-gradient(150deg,var(--bg-3),var(--bg-2));}
+.tr-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);}
+.tr-card:hover .tr-media img{transform:scale(1.06);}
+.tr-exp{position:absolute;top:12px;right:12px;background:var(--lime);color:#0a0a0a;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:5px 9px;border-radius:2px;}
+.tr-body{padding:20px;}
+.tr-body h3{font-family:'Anton',sans-serif;font-size:19px;text-transform:uppercase;}
+.tr-spec{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);letter-spacing:.06em;text-transform:uppercase;margin:6px 0 10px;}
+.tr-body p{font-size:13px;color:var(--text-dim2);margin-bottom:14px;}
+.tr-social{display:flex;gap:10px;}
+.tr-social a{width:30px;height:30px;border:1px solid var(--stroke-2);border-radius:2px;display:flex;align-items:center;justify-content:center;transition:border-color .3s,color .3s;}
+.tr-social a:hover{border-color:var(--lime);color:var(--lime);}
+.tr-social svg{width:14px;height:14px;}
+@media(max-width:980px){.tr-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.tr-grid{grid-template-columns:1fr;}}
+
+/* ============ MEMBERSHIP ============ */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;}
+.plan{border:1px solid var(--stroke);border-radius:var(--r-lg);padding:38px 32px;background:var(--card);display:flex;flex-direction:column;transition:transform .4s var(--ease);}
+.plan:hover{transform:translateY(-6px);}
+.plan.popular{border-color:var(--lime);background:linear-gradient(165deg,#181c0d,var(--card) 55%);position:relative;transform:scale(1.035);box-shadow:0 30px 60px -25px rgba(215,255,62,.25);}
+.plan.popular:hover{transform:scale(1.035) translateY(-6px);}
+.ribbon{position:absolute;top:-14px;left:32px;background:var(--lime);color:#0a0a0a;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;padding:6px 12px;border-radius:2px;text-transform:uppercase;}
+.plan-name{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--text-dim);text-transform:uppercase;}
+.plan-price{font-family:'Anton',sans-serif;font-size:46px;margin:14px 0 4px;}
+.plan-price span{font-size:15px;font-family:'Inter',sans-serif;color:var(--text-dim2);font-weight:400;}
+.plan hr{border:none;border-top:1px solid var(--stroke);margin:22px 0;}
+.plan-feats{flex:1;margin-bottom:28px;}
+.plan-feats li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-dim);padding:7px 0;}
+.plan-feats svg{width:16px;height:16px;color:var(--lime);flex-shrink:0;margin-top:3px;}
+@media(max-width:980px){.plans{grid-template-columns:1fr;} .plan.popular{transform:none;} .plan.popular:hover{transform:translateY(-6px);}}
+
+/* ============ TESTIMONIALS ============ */
+.testi-section{background:var(--bg-2);border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.testi-card{border:1px solid var(--stroke);border-radius:var(--r-md);padding:30px;background:var(--bg);display:flex;flex-direction:column;}
+.stars{display:flex;gap:3px;margin-bottom:18px;}
+.stars svg{width:15px;height:15px;color:var(--lime);}
+.testi-card p{font-size:15px;color:var(--text-dim);flex:1;margin-bottom:22px;}
+.testi-who{display:flex;align-items:center;gap:12px;}
+.testi-who img{width:42px;height:42px;border-radius:50%;object-fit:cover;background:var(--bg-3);}
+.testi-who b{display:block;font-size:14px;}
+.testi-who span{font-size:12px;color:var(--text-dim2);font-family:'JetBrains Mono',monospace;}
+@media(max-width:900px){.testi-grid{grid-template-columns:1fr;}}
+
+/* ============ GALLERY ============ */
+.gallery{column-count:3;column-gap:18px;}
+.gallery figure{break-inside:avoid;margin-bottom:18px;position:relative;overflow:hidden;border-radius:var(--r-md);border:1px solid var(--stroke);background:linear-gradient(150deg,var(--bg-3),var(--bg-2));}
+.gallery img{width:100%;display:block;transition:transform .7s var(--ease);}
+.gallery figure:hover img{transform:scale(1.09);}
+.gallery figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:16px;
+  background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);
+  opacity:0;transform:translateY(8px);transition:all .4s var(--ease);
+}
+.gallery figure:hover figcaption{opacity:1;transform:translateY(0);}
+@media(max-width:900px){.gallery{column-count:2;}}
+@media(max-width:560px){.gallery{column-count:1;}}
+
+/* ============ FACILITIES ============ */
+.fac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.fac-card{border:1px solid var(--stroke);border-radius:var(--r-md);padding:26px 22px;background:var(--card);transition:border-color .3s,transform .4s var(--ease);}
+.fac-card:hover{border-color:var(--stroke-2);transform:translateY(-4px);}
+.fac-card svg{width:26px;height:26px;color:var(--lime);margin-bottom:16px;}
+.fac-card b{font-size:14.5px;display:block;}
+@media(max-width:980px){.fac-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ============ FAQ ============ */
+.faq-list{max-width:760px;}
+.faq-item{border-bottom:1px solid var(--stroke);}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:26px 0;text-align:left;font-size:17px;font-weight:600;gap:20px;}
+.faq-q svg{width:18px;height:18px;flex-shrink:0;transition:transform .4s var(--ease);color:var(--lime);}
+.faq-item.open .faq-q svg{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease);}
+.faq-a p{padding-bottom:24px;color:var(--text-dim);font-size:14.5px;max-width:640px;}
+
+/* ============ FINAL CTA ============ */
+.final-cta{position:relative;overflow:hidden;text-align:center;padding:150px 0;}
+.final-cta .blob{position:absolute;width:700px;height:700px;border-radius:50%;filter:blur(120px);opacity:.16;background:var(--lime);top:-250px;left:50%;transform:translateX(-50%);animation:blobMove 12s ease-in-out infinite;}
+@keyframes blobMove{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-46%) translateY(60px);}}
+.final-cta h2{font-size:clamp(38px,7vw,86px);position:relative;z-index:1;max-width:900px;margin:0 auto;}
+.final-cta p{color:var(--text-dim);margin:22px auto 40px;max-width:460px;position:relative;z-index:1;}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;}
+.c-info-row{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--stroke);}
+.c-info-row svg{width:19px;height:19px;color:var(--lime);flex-shrink:0;margin-top:2px;}
+.c-info-row b{display:block;font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim2);margin-bottom:4px;}
+.c-info-row span{font-size:15px;}
+.map-box{
+  margin-top:26px;height:180px;border-radius:var(--r-md);border:1px solid var(--stroke);
+  background-image:linear-gradient(rgba(215,255,62,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(215,255,62,.05) 1px,transparent 1px),linear-gradient(160deg,var(--bg-3),var(--bg-2));
+  background-size:28px 28px,28px 28px,100% 100%;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;position:relative;
+}
+.map-box svg{width:26px;height:26px;color:var(--lime);}
+.map-box span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim2);letter-spacing:.06em;text-transform:uppercase;}
+.wa-btn{margin-top:26px;width:100%;justify-content:center;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.field.full{grid-column:1/-1;}
+.field label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim2);}
+.field input,.field select,.field textarea{
+  background:var(--card);border:1px solid var(--stroke-2);border-radius:2px;padding:13px 14px;
+  color:var(--text);font-family:'Inter',sans-serif;font-size:14.5px;transition:border-color .3s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--lime);outline:none;}
+.field textarea{resize:vertical;min-height:110px;}
+.form-note{font-size:12.5px;color:var(--lime);margin-top:14px;display:none;}
+.form-note.show{display:block;}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;} .form-grid{grid-template-columns:1fr;}}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--stroke);padding:70px 0 30px;background:var(--bg-2);}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;margin-bottom:60px;}
+.foot-brand p{color:var(--text-dim2);font-size:13.5px;margin:16px 0 22px;max-width:280px;}
+.foot-social{display:flex;gap:10px;}
+.foot-social a{width:34px;height:34px;border:1px solid var(--stroke-2);border-radius:2px;display:flex;align-items:center;justify-content:center;transition:border-color .3s,color .3s;}
+.foot-social a:hover{border-color:var(--lime);color:var(--lime);}
+.foot-social svg{width:15px;height:15px;}
+.foot-col h4{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim2);margin-bottom:18px;}
+.foot-col li{margin-bottom:11px;}
+.foot-col a{font-size:14px;color:var(--text-dim);transition:color .3s;}
+.foot-col a:hover{color:var(--lime);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;border-top:1px solid var(--stroke);font-size:12.5px;color:var(--text-dim2);flex-wrap:wrap;gap:10px;}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#home" class="logo"><span class="dot"></span>IRONVAULT</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#trainers">Trainers</a></li>
+      <li><a href="#membership">Membership</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#membership" class="btn btn-fill">Join Now</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#programs">Programs</a>
+  <a href="#trainers">Trainers</a>
+  <a href="#membership">Membership</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-media">
+    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=80" alt="Athlete lifting a barbell in a dark gym" onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1800&q=80'; this.onerror=null;">
+    <div class="hero-glow lime"></div>
+    <div class="hero-glow orange"></div>
+  </div>
+  <div class="hero-inner wrap">
+    <div class="trust-line"><b>500+</b> Members &nbsp;•&nbsp; <b>20+</b> Expert Trainers &nbsp;•&nbsp; Open <b>6AM–11PM</b></div>
+    <h1>
+      <span class="line"><span>BUILD POWER.</span></span>
+      <span class="line"><span>BUILD DISCIPLINE.</span></span>
+    </h1>
+    <p class="hero-sub">More than a gym. A place where strength, confidence and discipline are built every single day.</p>
+    <div class="hero-btns">
+      <a href="#membership" class="btn btn-fill">Start Your Journey <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#programs" class="btn btn-line">Explore Programs</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="bar"></div></div>
+</section>
+
+<!-- ============ TICKER (sits in its own empty strip, never over hero text) ============ -->
+<section class="ticker"><div class="track">
+    <span>Strength</span><span class="accent">•</span><span>Discipline</span><span class="accent">•</span><span>Power</span><span class="accent">•</span><span>Performance</span><span class="accent">•</span><span>Community</span><span class="accent">•</span><span>Results</span><span class="accent">•</span>
+    <span>Strength</span><span class="accent">•</span><span>Discipline</span><span class="accent">•</span><span>Power</span><span class="accent">•</span><span>Performance</span><span class="accent">•</span><span>Community</span><span class="accent">•</span><span>Results</span><span class="accent">•</span>
+</div></section>
+
+<!-- ============ STATS ============ -->
+<section class="stats-section">
+  <div class="wrap stats-grid">
+    <div class="stat rv"><div class="num"><span class="count" data-target="500">0</span>+</div><div class="lbl">Active Members</div></div>
+    <div class="stat rv"><div class="num"><span class="count" data-target="20">0</span>+</div><div class="lbl">Expert Trainers</div></div>
+    <div class="stat rv"><div class="num"><span class="count" data-target="8">0</span>+</div><div class="lbl">Training Programs</div></div>
+    <div class="stat rv"><div class="num">6–11</div><div class="lbl">Open Daily (6AM–11PM)</div></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div class="collage rv-scale">
+      <div class="frame"></div>
+      <img class="c1" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=75" alt="Member training with free weights at IronVault" onerror="this.remove()">
+      <img class="c2" src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=700&q=75" alt="Trainer coaching a member" onerror="this.remove()">
+    </div>
+    <div class="about-copy rv">
+      <span class="eyebrow">About IronVault</span>
+      <h2>Where Commitment<br>Becomes Strength</h2>
+      <p>IronVault brings modern equipment, expert coaching and structured programs together in one clean, purpose-built space — backed by a community that keeps you showing up.</p>
+      <div class="feat-list">
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><div><b>Premium Equipment</b><span>Commercial-grade racks &amp; machines</span></div></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><div><b>Certified Trainers</b><span>Coaches who track your form</span></div></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><div><b>Personalized Programs</b><span>Plans built around your goals</span></div></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><div><b>Clean &amp; Modern Facility</b><span>Maintained, spacious, well-lit</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROGRAMS ============ -->
+<section class="section" id="programs">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">Training Programs</span>
+      <h2>Six Ways To Train</h2>
+      <p>Every program is coached, structured and built to move you forward — pick one, or combine a few as your goals evolve.</p>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card rv">
+        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=75" alt="Strength and conditioning training" onerror="this.remove()">
+        <div class="prog-body"><span class="prog-set">Set 01 / 06</span><h3>Strength &amp; Conditioning</h3><p>Build strength, endurance and athletic performance.</p><a href="#contact" class="prog-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="prog-card rv">
+        <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=800&q=75" alt="Bodybuilding training" onerror="this.remove()">
+        <div class="prog-body"><span class="prog-set">Set 02 / 06</span><h3>Bodybuilding</h3><p>Structured training focused on progressive muscle development.</p><a href="#contact" class="prog-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="prog-card rv">
+        <img src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?auto=format&fit=crop&w=800&q=75" alt="Functional training session" onerror="this.remove()">
+        <div class="prog-body"><span class="prog-set">Set 03 / 06</span><h3>Functional Training</h3><p>Improve mobility, stability, strength and everyday performance.</p><a href="#contact" class="prog-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="prog-card rv">
+        <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?auto=format&fit=crop&w=800&q=75" alt="Personal training session" onerror="this.remove()">
+        <div class="prog-body"><span class="prog-set">Set 04 / 06</span><h3>Personal Training</h3><p>One-on-one coaching with customized training plans.</p><a href="#contact" class="prog-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="prog-card rv">
+        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=75" alt="High intensity interval training" onerror="this.remove()">
+        <div class="prog-body"><span class="prog-set">Set 05 / 06</span><h3>HIIT</h3><p>High-intensity workouts designed to challenge your limits.</p><a href="#contact" class="prog-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+      </div>
+      <div class="prog-card rv">
+        <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=800&q=75" alt="Transformation program progress tracking" onerror="this.remove()">
+        <div class="prog-body"><span class="prog-set">Set 06 / 06</span><h3>Transformation</h3><p>A structured fitness journey with training and progress tracking.</p><a href="#contact" class="prog-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRAINERS ============ -->
+<section class="section" id="trainers">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">Our Coaches</span>
+      <h2>Trained By The Best</h2>
+      <p>Four certified coaches, one standard: technique first, intensity earned.</p>
+    </div>
+    <div class="tr-grid">
+      <div class="tr-card rv">
+        <div class="tr-media"><span class="tr-exp">9 YRS</span><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Arjun Malhotra, Strength & Conditioning Coach" onerror="this.remove()"></div>
+        <div class="tr-body"><h3>Arjun Malhotra</h3><div class="tr-spec">Strength &amp; Conditioning</div><p>Builds strength from the ground up — one clean rep at a time.</p>
+        <div class="tr-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 018 0v8"/></svg></a>
+        </div></div>
+      </div>
+      <div class="tr-card rv">
+        <div class="tr-media"><span class="tr-exp">7 YRS</span><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Kavya Reddy, Bodybuilding Specialist" onerror="this.remove()"></div>
+        <div class="tr-body"><h3>Kavya Reddy</h3><div class="tr-spec">Bodybuilding Specialist</div><p>Progressive programming for lean, structured muscle gain.</p>
+        <div class="tr-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 018 0v8"/></svg></a>
+        </div></div>
+      </div>
+      <div class="tr-card rv">
+        <div class="tr-media"><span class="tr-exp">6 YRS</span><img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Rohan Verma, Functional Training Coach" onerror="this.remove()"></div>
+        <div class="tr-body"><h3>Rohan Verma</h3><div class="tr-spec">Functional Training</div><p>Movement quality, mobility and real-world strength.</p>
+        <div class="tr-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 018 0v8"/></svg></a>
+        </div></div>
+      </div>
+      <div class="tr-card rv">
+        <div class="tr-media"><span class="tr-exp">8 YRS</span><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Simran Kaur, Personal Trainer and Nutrition Coach" onerror="this.remove()"></div>
+        <div class="tr-body"><h3>Simran Kaur</h3><div class="tr-spec">Personal Training &amp; Nutrition</div><p>Customized plans that fit your schedule and your goals.</p>
+        <div class="tr-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 018 0v8"/></svg></a>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMBERSHIP ============ -->
+<section class="section" id="membership">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">Membership</span>
+      <h2>Plans That Fit Your Goal</h2>
+      <p>No lock-in gimmicks — just three straightforward tiers built around how much support you want.</p>
+    </div>
+    <div class="plans">
+      <div class="plan rv">
+        <div class="plan-name">Basic</div>
+        <div class="plan-price">₹999<span>/month</span></div>
+        <hr>
+        <ul class="plan-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Gym Access</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Locker Facility</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Cardio Zone</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Basic Fitness Assessment</li>
+        </ul>
+        <a href="#contact" class="btn btn-line" style="justify-content:center">Choose Basic</a>
+      </div>
+      <div class="plan popular rv">
+        <span class="ribbon">Most Popular</span>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">₹1,999<span>/month</span></div>
+        <hr>
+        <ul class="plan-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Everything in Basic</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Personal Training Sessions</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Customized Workout Plan</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Progress Tracking</li>
+        </ul>
+        <a href="#contact" class="btn btn-fill" style="justify-content:center">Choose Pro</a>
+      </div>
+      <div class="plan rv">
+        <div class="plan-name">Elite</div>
+        <div class="plan-price">₹3,499<span>/month</span></div>
+        <hr>
+        <ul class="plan-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Everything in Pro</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Unlimited Personal Training</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Nutrition Guidance</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Priority Support</li>
+        </ul>
+        <a href="#contact" class="btn btn-line" style="justify-content:center">Choose Elite</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section testi-section">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">Member Stories</span>
+      <h2>Real Progress, Real People</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card rv">
+        <div class="stars">★★★★★</div>
+        <p>"Six months in and I finally look forward to leg day. The coaches actually correct your form instead of just counting reps."</p>
+        <div class="testi-who"><img src="https://randomuser.me/api/portraits/men/12.jpg" alt="" onerror="this.remove()"><div><b>Aditya Sharma</b><span>Transformation Program</span></div></div>
+      </div>
+      <div class="testi-card rv">
+        <div class="stars">★★★★★</div>
+        <p>"My trainer built a plan around my knee issue instead of ignoring it. First gym where I've felt genuinely looked after."</p>
+        <div class="testi-who"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt="" onerror="this.remove()"><div><b>Priya Nair</b><span>Personal Training</span></div></div>
+      </div>
+      <div class="testi-card rv">
+        <div class="stars">★★★★☆</div>
+        <p>"The strength program is genuinely structured — progressive overload, tracked every week. Best decision I made this year."</p>
+        <div class="testi-who"><img src="https://randomuser.me/api/portraits/men/52.jpg" alt="" onerror="this.remove()"><div><b>Karan Mehta</b><span>Strength &amp; Conditioning</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">Gallery</span>
+      <h2>Inside IronVault</h2>
+    </div>
+    <div class="gallery">
+      <figure class="rv"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=700&q=75" alt="Weight training area" onerror="this.remove()"><figcaption>Weight Training</figcaption></figure>
+      <figure class="rv"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=700&q=75" alt="Cardio zone" onerror="this.remove()"><figcaption>Cardio Zone</figcaption></figure>
+      <figure class="rv"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=700&q=75" alt="Functional training" onerror="this.remove()"><figcaption>Functional Training</figcaption></figure>
+      <figure class="rv"><img src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?auto=format&fit=crop&w=700&q=75" alt="Group workout" onerror="this.remove()"><figcaption>Group Workouts</figcaption></figure>
+      <figure class="rv"><img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=700&q=75" alt="Trainer coaching" onerror="this.remove()"><figcaption>Our Trainers</figcaption></figure>
+      <figure class="rv"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=75" alt="Gym interior" onerror="this.remove()"><figcaption>Gym Interior</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FACILITIES ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">Facilities</span>
+      <h2>Everything You Need</h2>
+    </div>
+    <div class="fac-grid">
+      <div class="fac-card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.5 6.5l11 11M4 10l4-4M20 14l-4 4M2 2l2.5 2.5M22 22l-2.5-2.5M9 3l-6 6M21 15l-6 6"/></svg><b>Strength Zone</b></div>
+      <div class="fac-card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><b>Cardio Zone</b></div>
+      <div class="fac-card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><b>Functional Area</b></div>
+      <div class="fac-card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><path d="M9 12h6"/></svg><b>Free Weights</b></div>
+      <div class="fac-card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 3v18"/></svg><b>Personal Training Studio</b></div>
+      <div class="fac-card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg><b>Changing Rooms</b></div>
+      <div class="fac-card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="15" cy="12" r="1"/></svg><b>Locker Facility</b></div>
+      <div class="fac-card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 015 5c0 3-5 10-5 10S7 10 7 7a5 5 0 015-5z"/><circle cx="12" cy="7" r="2"/></svg><b>Recovery Area</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">FAQ</span>
+      <h2>Good To Know</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item rv">
+        <button class="faq-q" aria-expanded="false">What are your opening hours?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a"><p>We're open daily from 6AM to 11PM, including weekends and most public holidays.</p></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q" aria-expanded="false">Do you offer personal training?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a"><p>Yes — one-on-one coaching is included from the Pro plan up, with unlimited sessions on Elite.</p></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q" aria-expanded="false">Is there a trial session?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a"><p>Yes, we offer a guided trial visit so you can see the facility and meet a coach before joining.</p></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q" aria-expanded="false">Which membership should I choose?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a"><p>If you're new to training or want structured guidance, Pro is the most popular starting point. Basic suits confident independent lifters.</p></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q" aria-expanded="false">Do you provide workout plans?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a"><p>Every Pro and Elite member gets a customized plan, reviewed and adjusted as you progress.</p></div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q" aria-expanded="false">Is parking available?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a"><p>Yes, free on-site parking is available for all members during opening hours.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta">
+  <div class="blob"></div>
+  <div class="wrap">
+    <span class="eyebrow rv" style="justify-content:center">Ready When You Are</span>
+    <h2 class="rv">Your Strongest Version<br>Starts Here.</h2>
+    <p class="rv">Stop waiting for the perfect time. Start building today.</p>
+    <a href="#contact" class="btn btn-fill rv">Join IronVault <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">Contact</span>
+      <h2>Let's Get You Started</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="rv">
+        <div class="c-info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><div><b>Phone</b><span>+91 98765 43210</span></div></div>
+        <div class="c-info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2H7a1 1 0 00-1 1v18l6-4 6 4V3a1 1 0 00-1-1z"/></svg><div><b>WhatsApp</b><span>+91 98765 43210</span></div></div>
+        <div class="c-info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg><div><b>Email</b><span>hello@ironvaultfitness.in</span></div></div>
+        <div class="c-info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><div><b>Address</b><span>2nd Floor, Horizon Tower, Baner Road, Pune</span></div></div>
+        <div class="c-info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><div><b>Hours</b><span>Mon–Sun, 6AM – 11PM</span></div></div>
+        <div class="map-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Baner Road, Pune</span></div>
+        <a href="#" class="btn btn-fill wa-btn">Message Us on WhatsApp</a>
+      </div>
+      <form class="rv" id="contactForm">
+        <div class="form-grid">
+          <div class="field"><label for="cf-name">Name</label><input id="cf-name" type="text" required placeholder="Your full name"></div>
+          <div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" type="tel" required placeholder="+91 00000 00000"></div>
+          <div class="field full"><label for="cf-email">Email</label><input id="cf-email" type="email" required placeholder="you@email.com"></div>
+          <div class="field full"><label for="cf-interest">Interested In</label>
+            <select id="cf-interest">
+              <option>Strength &amp; Conditioning</option>
+              <option>Bodybuilding</option>
+              <option>Functional Training</option>
+              <option>Personal Training</option>
+              <option>HIIT</option>
+              <option>Transformation Program</option>
+            </select>
+          </div>
+          <div class="field full"><label for="cf-msg">Message</label><textarea id="cf-msg" placeholder="Tell us about your goals..."></textarea></div>
+        </div>
+        <button type="submit" class="btn btn-fill" style="width:100%;justify-content:center">Send Message</button>
+        <p class="form-note" id="formNote">Thanks — we'll get back to you within one business day.</p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#home" class="logo"><span class="dot"></span>IRONVAULT</a>
+        <p>A premium strength, bodybuilding and personal-training club — built for people serious about the work.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Navigation</h4><ul>
+        <li><a href="#about">About</a></li><li><a href="#trainers">Trainers</a></li><li><a href="#membership">Membership</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Programs</h4><ul>
+        <li><a href="#programs">Strength &amp; Conditioning</a></li><li><a href="#programs">Bodybuilding</a></li><li><a href="#programs">Functional Training</a></li><li><a href="#programs">Personal Training</a></li><li><a href="#programs">HIIT</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Contact</h4><ul>
+        <li><a href="tel:+919876543210">+91 98765 43210</a></li><li><a href="mailto:hello@ironvaultfitness.in">hello@ironvaultfitness.in</a></li><li><a href="#contact">Baner Road, Pune</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 IronVault Fitness. All rights reserved.</span>
+      <span>Built for those who show up.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---- Sticky nav ----
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+}, {passive:true});
+
+// ---- Mobile menu ----
+const burger = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mobileMenu.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', false);
+  document.body.style.overflow = '';
+}));
+
+// ---- Scroll reveal ----
+const revealEls = document.querySelectorAll('.rv, .rv-scale');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+revealEls.forEach((el, i) => {
+  el.style.transitionDelay = (i % 6) * 0.06 + 's';
+  io.observe(el);
+});
+
+// ---- Count-up numbers ----
+const counters = document.querySelectorAll('.count');
+const countIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target, 10);
+      const dur = 1400;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(eased * target);
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(tick);
+      countIO.unobserve(el);
+    }
+  });
+}, {threshold:0.4});
+counters.forEach(c => countIO.observe(c));
+
+// ---- FAQ accordion ----
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(other => {
+      if (other !== item) {
+        other.classList.remove('open');
+        other.querySelector('.faq-q').setAttribute('aria-expanded','false');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      }
+    });
+    item.classList.toggle('open', !isOpen);
+    q.setAttribute('aria-expanded', !isOpen);
+    a.style.maxHeight = !isOpen ? a.scrollHeight + 'px' : null;
+  });
+});
+
+// ---- Contact form (demo only, no backend) ----
+const form = document.getElementById('contactForm');
+const note = document.getElementById('formNote');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  note.classList.add('show');
+  form.reset();
+  setTimeout(() => note.classList.remove('show'), 6000);
+});
+</script>
+</body>
+</html>
