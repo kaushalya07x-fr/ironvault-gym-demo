@@ -138,16 +138,38 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;}
 .burger.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
 
 .mobile-menu{
-  position:fixed;inset:0;background:var(--bg);z-index:150;
-  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:22px;
-  padding:0 32px;
+  position:fixed;inset:0;background:linear-gradient(165deg,#131311,#0a0a0a);z-index:150;
+  display:flex;flex-direction:column;
   clip-path:circle(0px at calc(100% - 40px) 40px);
   transition:clip-path .55s var(--ease);
   pointer-events:none;
 }
 .mobile-menu.open{clip-path:circle(150% at calc(100% - 40px) 40px);pointer-events:all;}
-.mobile-menu a{font-family:'Anton',sans-serif;font-size:38px;text-transform:uppercase;color:var(--text-dim);}
-.mobile-menu a:hover{color:var(--lime);}
+.mm-top{padding:26px 28px 6px;}
+.mm-links{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 28px;}
+.mm-links a{
+  display:flex;align-items:center;gap:14px;padding:13px 0;
+  border-bottom:1px solid var(--stroke);
+  font-family:'Anton',sans-serif;font-size:25px;letter-spacing:.01em;text-transform:uppercase;color:var(--text-dim);
+  opacity:0;transform:translateX(20px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease),color .3s;
+}
+.mobile-menu.open .mm-links a{opacity:1;transform:translateX(0);}
+.mm-links a:hover,.mm-links a:focus-visible{color:var(--lime);}
+.mm-links a .mm-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);opacity:.85;min-width:20px;}
+.mm-links a:nth-child(1){transition-delay:.05s;}
+.mm-links a:nth-child(2){transition-delay:.1s;}
+.mm-links a:nth-child(3){transition-delay:.15s;}
+.mm-links a:nth-child(4){transition-delay:.2s;}
+.mm-links a:nth-child(5){transition-delay:.25s;}
+.mm-links a:nth-child(6){transition-delay:.3s;}
+.mm-links a:nth-child(7){transition-delay:.35s;}
+.mm-bottom{padding:18px 28px 34px;display:flex;flex-direction:column;gap:16px;}
+.mm-social{display:flex;gap:10px;}
+.mm-social a{width:32px;height:32px;border:1px solid var(--stroke-2);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--text-dim);transition:border-color .3s,color .3s;opacity:1;transform:none;}
+.mm-social a:hover{border-color:var(--lime);color:var(--lime);}
+.mm-social svg{width:14px;height:14px;}
+@media(max-width:360px){.mm-links a{font-size:21px;padding:10px 0;}}
 
 @media(max-width:900px){
   .nav-links{display:none;}
@@ -206,6 +228,22 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;}
 .scroll-cue .bar{width:1px;height:34px;background:var(--stroke-2);position:relative;overflow:hidden;}
 .scroll-cue .bar::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--lime);animation:scrollDown 1.8s ease-in-out infinite;}
 @keyframes scrollDown{0%{top:-100%;}60%{top:100%;}100%{top:100%;}}
+
+/* ---- hero mobile fixes: keep content clear of the fixed header & the scroll cue ---- */
+@media(max-width:720px){
+  .hero{align-items:center;padding:110px 0 90px;min-height:100svh;}
+  .trust-line{font-size:10.5px;gap:6px 10px;margin-bottom:16px;}
+  .hero h1{font-size:clamp(36px,13vw,58px);}
+  .hero-sub{font-size:14.5px;margin:16px 0 26px;max-width:340px;}
+  .hero-btns{gap:12px;}
+  .hero-btns .btn{width:100%;justify-content:center;padding:15px 22px;}
+  .scroll-cue{display:none;}
+}
+@media(max-width:400px){
+  .trust-line{display:none;}
+  .hero{padding-top:90px;}
+  .hero h1{font-size:clamp(32px,14vw,48px);}
+}
 
 /* ============ STATS ============ */
 .stats-section{border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);background:var(--bg-2);}
@@ -411,13 +449,24 @@ footer{border-top:1px solid var(--stroke);padding:70px 0 30px;background:var(--b
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#programs">Programs</a>
-  <a href="#trainers">Trainers</a>
-  <a href="#membership">Membership</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#contact">Contact</a>
+  <div class="mm-top"><a href="#home" class="logo"><span class="dot"></span>IRONVAULT</a></div>
+  <nav class="mm-links">
+    <a href="#home"><span class="mm-num">01</span>Home</a>
+    <a href="#about"><span class="mm-num">02</span>About</a>
+    <a href="#programs"><span class="mm-num">03</span>Programs</a>
+    <a href="#trainers"><span class="mm-num">04</span>Trainers</a>
+    <a href="#membership"><span class="mm-num">05</span>Membership</a>
+    <a href="#gallery"><span class="mm-num">06</span>Gallery</a>
+    <a href="#contact"><span class="mm-num">07</span>Contact</a>
+  </nav>
+  <div class="mm-bottom">
+    <a href="#membership" class="btn btn-fill" style="justify-content:center">Join Now</a>
+    <div class="mm-social">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
+    </div>
+  </div>
 </div>
 
 <main>
